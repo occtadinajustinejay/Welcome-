@@ -1,0 +1,314 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#07110D">
+  <meta name="description" content="Welcome! A world of your own.">
+
+  <title>welcome! — A world of your own</title>
+
+  <link rel="manifest" href="./manifest.json">
+  <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+  <div class="app-background">
+    <div class="ambient ambient-one"></div>
+    <div class="ambient ambient-two"></div>
+    <div class="ambient ambient-three"></div>
+  </div>
+
+  <!-- AUTHENTICATION -->
+  <section id="authScreen" class="auth-screen">
+    <div class="auth-card glass-panel">
+      <div class="brand-mark">w.</div>
+      <p class="eyebrow">YOUR PERSONAL SPACE</p>
+      <h1>welcome<span>!</span></h1>
+      <p class="muted">A little world that belongs to you.</p>
+
+      <div class="auth-tabs">
+        <button id="loginTab" class="auth-tab active">Log in</button>
+        <button id="signupTab" class="auth-tab">Create account</button>
+      </div>
+
+      <form id="authForm">
+        <label for="authName" id="authNameLabel" hidden>Name</label>
+        <input id="authName" type="text" placeholder="Your name" hidden>
+
+        <label for="authEmail">Email</label>
+        <input id="authEmail" type="email"
+          placeholder="Enter your email" required>
+
+        <label for="authPassword">Password</label>
+        <input id="authPassword" type="password"
+          placeholder="Enter your password" required>
+
+        <label class="remember-option">
+          <input id="rememberUser" type="checkbox" checked>
+          <span>Remember this account</span>
+        </label>
+
+        <button id="authSubmit" class="primary-button" type="submit">
+          Enter your world
+        </button>
+      </form>
+
+      <div id="savedAccountsPanel" hidden>
+        <p class="eyebrow">SAVED ACCOUNTS</p>
+        <div id="savedAccountsList"></div>
+      </div>
+
+      <p id="authMessage" class="form-message"></p>
+    </div>
+  </section>
+
+  <!-- MAIN APPLICATION -->
+  <div id="appShell" class="app-shell" hidden>
+
+    <header class="topbar glass-panel">
+      <a class="brand" href="#" data-page="homePage">
+        welcome<span>!</span>
+      </a>
+
+      <div class="topbar-actions">
+        <button id="searchButton" class="icon-button"
+          aria-label="Search">⌕</button>
+        <button id="notificationButton" class="icon-button"
+          aria-label="Notifications">♧</button>
+        <button id="accountMenuButton" class="avatar-button"
+          aria-label="Account menu">
+          <span id="topbarAvatar">W</span>
+        </button>
+      </div>
+    </header>
+
+    <main class="main-content">
+
+      <!-- HOME -->
+      <section id="homePage" class="page active">
+        <div class="page-heading">
+          <p class="eyebrow">YOUR LITTLE CORNER</p>
+          <h2>Home<span>.</span></h2>
+          <p class="muted">What's happening in your world?</p>
+        </div>
+
+        <div class="composer glass-panel">
+          <div class="composer-heading">
+            <span class="online-dot"></span>
+            <span>Create something</span>
+          </div>
+
+          <textarea id="postText"
+            placeholder="Write something..."></textarea>
+
+          <div id="postImagePreview" class="media-preview"></div>
+
+          <div class="composer-actions">
+            <label class="upload-button" for="postImageInput">
+              ＋ Photo
+            </label>
+            <input id="postImageInput" type="file"
+              accept="image/*" hidden>
+
+            <label class="upload-button" for="postVideoInput">
+              ＋ Video
+            </label>
+            <input id="postVideoInput" type="file"
+              accept="video/*" hidden>
+
+            <button id="publishPost" class="primary-button">
+              Publish ↗
+            </button>
+          </div>
+          <p id="postMessage" class="form-message"></p>
+        </div>
+
+        <div id="feedContainer" class="feed-container"></div>
+      </section>
+
+      <!-- PROFILE -->
+      <section id="profilePage" class="page">
+        <div class="page-heading">
+          <p class="eyebrow">YOUR IDENTITY</p>
+          <h2>Profile<span>.</span></h2>
+        </div>
+
+        <div class="profile-card glass-panel">
+          <div class="profile-cover"></div>
+
+          <div class="profile-main">
+            <label class="profile-avatar" for="profilePictureInput">
+              <img id="profilePicture" alt="Profile picture">
+              <span class="avatar-edit">＋</span>
+            </label>
+            <input id="profilePictureInput" type="file"
+              accept="image/*" hidden>
+
+            <h3 id="profileName">Welcome</h3>
+            <p id="profileBio" class="muted">Your space, your story.</p>
+
+            <div class="profile-stats">
+              <div><strong id="postCount">0</strong><span>Posts</span></div>
+              <div><strong id="followerCount">0</strong><span>Followers</span></div>
+              <div><strong id="followingCount">12</strong><span>Following</span></div>
+            </div>
+
+            <button id="editProfileButton" class="secondary-button">
+              Edit profile
+            </button>
+          </div>
+        </div>
+
+        <div id="profileEditor" class="glass-panel editor-panel" hidden>
+          <h3>Edit your profile</h3>
+          <label for="editName">Name</label>
+          <input id="editName" type="text">
+          <label for="editBio">Bio</label>
+          <textarea id="editBio"></textarea>
+          <button id="saveProfileButton" class="primary-button">
+            Save changes
+          </button>
+        </div>
+
+        <div class="section-heading">
+          <h3>Your posts</h3>
+        </div>
+        <div id="profileFeedContainer" class="feed-container"></div>
+      </section>
+
+      <!-- GAMING GALLERY -->
+      <section id="gamingPage" class="page">
+        <div class="page-heading">
+          <p class="eyebrow">CAPTURED MOMENTS</p>
+          <h2>Gallery<span>.</span></h2>
+        </div>
+        <label class="upload-button glass-panel" for="gamingUpload">
+          ＋ Add photos or videos
+        </label>
+        <input id="gamingUpload" type="file"
+          accept="image/*,video/*" multiple hidden>
+        <div id="gamingGallery" class="media-grid"></div>
+      </section>
+
+      <!-- ANIME -->
+      <section id="animePage" class="page">
+        <div class="page-heading">
+          <p class="eyebrow">COLLECTIONS</p>
+          <h2>Anime<span>.</span></h2>
+        </div>
+        <button id="addAnimeButton" class="primary-button">
+          ＋ Add anime
+        </button>
+        <div id="animeContainer" class="collection-grid"></div>
+      </section>
+
+      <!-- MANGA -->
+      <section id="mangaPage" class="page">
+        <div class="page-heading">
+          <p class="eyebrow">COLLECTIONS</p>
+          <h2>Manga<span>.</span></h2>
+        </div>
+        <button id="addMangaButton" class="primary-button">
+          ＋ Add manga
+        </button>
+        <div id="mangaContainer" class="collection-grid"></div>
+      </section>
+
+      <!-- MUSIC -->
+      <section id="musicPage" class="page">
+        <div class="page-heading">
+          <p class="eyebrow">YOUR SOUNDTRACK</p>
+          <h2>Music<span>.</span></h2>
+        </div>
+        <label class="upload-button glass-panel" for="musicUpload">
+          ＋ Upload audio
+        </label>
+        <input id="musicUpload" type="file"
+          accept="audio/*" multiple hidden>
+        <div id="musicContainer" class="music-list"></div>
+      </section>
+
+      <!-- STORIES AND HIGHLIGHTS -->
+      <section id="storiesPage" class="page">
+        <div class="page-heading">
+          <p class="eyebrow">LITTLE MOMENTS</p>
+          <h2>Stories<span>.</span></h2>
+        </div>
+        <label class="upload-button glass-panel" for="storyUpload">
+          ＋ Add a story
+        </label>
+        <input id="storyUpload" type="file"
+          accept="image/*,video/*" hidden>
+        <div id="storiesContainer" class="media-grid"></div>
+
+        <div class="section-heading">
+          <h3>Highlights</h3>
+          <button id="addHighlightButton" class="secondary-button">
+            ＋ New highlight
+          </button>
+        </div>
+        <div id="highlightsContainer" class="highlight-grid"></div>
+      </section>
+
+    </main>
+
+    <!-- BOTTOM NAVIGATION -->
+    <nav class="bottom-nav glass-panel">
+      <button class="nav-button active" data-page="homePage">
+        <span>⌂</span><small>Home</small>
+      </button>
+      <button class="nav-button" data-page="animePage">
+        <span>◇</span><small>Anime</small>
+      </button>
+      <button class="nav-button" data-page="mangaPage">
+        <span>▤</span><small>Manga</small>
+      </button>
+      <button class="nav-button" data-page="musicPage">
+        <span>♫</span><small>Music</small>
+      </button>
+      <button class="nav-button" data-page="gamingPage">
+        <span>▧</span><small>Gallery</small>
+      </button>
+      <button class="nav-button" data-page="storiesPage">
+        <span>◉</span><small>Stories</small>
+      </button>
+      <button class="nav-button" data-page="profilePage">
+        <span>♙</span><small>Profile</small>
+      </button>
+    </nav>
+  </div>
+
+  <!-- UNIVERSAL MODAL -->
+  <div id="appModal" class="modal-backdrop" hidden>
+    <div class="modal-card glass-panel">
+      <button id="closeModal" class="modal-close"
+        aria-label="Close">×</button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <!-- GALLERY LIGHTBOX -->
+  <div id="gamingLightbox" class="lightbox" hidden>
+    <button id="closeGamingLightbox" class="modal-close">×</button>
+    <div id="gamingLightboxContent"></div>
+    <button id="deleteGamingMedia" class="danger-button">
+      Delete
+    </button>
+  </div>
+
+  <div id="toastContainer" class="toast-container"></div>
+
+  <script src="./app.js" defer></script>
+
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("./sw.js")
+          .catch(error => console.error("Service worker:", error));
+      });
+    }
+  </script>
+</body>
+</html>
